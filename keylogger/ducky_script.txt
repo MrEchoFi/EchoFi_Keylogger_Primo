@@ -1,0 +1,15 @@
+REM Sample Ducky Script for Thesis Demo
+GUI r
+DELAY 2000
+STRING notepad
+ENTER
+DELAY 2000
+STRING EchoFi_Kilogger Test
+ENTER
+
+DELAY 2000
+GUI r
+STRING https://youtu.be/kXYiU_JCYtU?si=rPr6BLWn0gIfSdZN
+ENTER
+DELAY 2000
+STRING f

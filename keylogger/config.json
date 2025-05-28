@@ -1,0 +1,6 @@
+{
+    "server_url": "http://localhost:5000",
+    "send_interval": 30,
+    "screenshot_interval": 60,
+    "ducky_script_path": "ducky_script.txt"
+}
