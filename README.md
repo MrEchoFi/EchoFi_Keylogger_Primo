@@ -7,7 +7,7 @@
   <h1>EchoFi Keylogger Primo</h1>
    
   <p>
-   A Real World Keylogger which contains custom server, ducky scripts, taking screenshots & send to server and also same as send keystrokes, info of victim device
+   A Real World Red Team Keylogger which contains custom server, ducky scripts, taking screenshots & send to server and also same as send keystrokes, info of victim device
   </p>
 
 
