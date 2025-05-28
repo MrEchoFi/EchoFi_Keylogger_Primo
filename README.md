@@ -12,11 +12,13 @@
 
 
   📫 How to reach me **tanjibisham777@gmail.com & tanjibisham888@gmail.com**
-</div>
+
 
 # Watch the video & listen:
 
 https://github.com/user-attachments/assets/a553813c-89c0-4093-b4c4-344e8329e9d9
+
+</div>
 
 # Photos:
     
@@ -38,4 +40,12 @@ https://github.com/user-attachments/assets/a553813c-89c0-4093-b4c4-344e8329e9d9
               // Now you can see all results of how ducky script worked, capture keystrokes when u will type anything then it captures all keystorkes, ss and send your server.
               // Btw refresh the server again then u can see that the keystrokes have been caaptured and also captured ss, recors of ducky Scripts.
 
+# Note: 
+<pre>
+     this keylogger contains ducky script and by using ducky script or create ducky script, anyone can inject or install malware in victims device. 
+ Btw this is a python file based keylogger . if u want to experience in real life by phishing then u can turn this python based keylogger file into exe file. But test this in lab environment with real authorization.
+
+//  i m using a example of ducky script to show you how it works! || you can change the ducky scripts. if u want to know how to write your own new custom ducky                 scripts then knock me in this---> tanjibisham777@gmail.com        
+</pre>
+      
    Happy_HackNight!!!!!!!!           
